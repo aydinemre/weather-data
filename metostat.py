@@ -151,8 +151,9 @@ def get_city_weather(station_id: str) -> list:
 def generate_output_filename(city: str):
     city = city_map.get(city, city)
     current_date = datetime.now().strftime("%Y-%m-%d")
-    os.makedirs("metostat-data", exist_ok=True)
-    return f"metostat-data/{current_date}-{city}.csv"
+    directory = os.path.join("metostat-data", current_date)
+    os.makedirs(directory, exist_ok=True)
+    return os.path.join(directory, f"{city}.csv")
 
 
 def crawl_city_weather(city):
